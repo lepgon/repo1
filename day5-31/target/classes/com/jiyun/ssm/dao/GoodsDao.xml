@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiyun.ssm.dao.GoodsDao">
+    <select id="findAll" resultMap="map1">
+        SELECT * FROM goods LEFT JOIN category2 ON cid=c_id
+    </select>
+    <resultMap id="map1" type="goods">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="price" property="price"></result>
+        <result column="c_id" property="c_id"></result>
+        <association property="category" javaType="category">
+            <id column="cid" property="cid"></id>
+            <result column="cname" property="cname"></result>
+        </association>
+    </resultMap>
+    <select id="getAllCategory" resultType="category">
+        SELECT * FROM   category2
+    </select>
+    <insert id="add">
+        insert into  goods values (null,#{name},#{price},#{c_id});
+    </insert>
+    <delete id="deleteById">
+        delete from  goods where  id=#{id}
+    </delete>
+    <select id="showById" resultMap="map1">
+          SELECT * FROM goods LEFT JOIN category2 ON cid=c_id where id=#{id}
+    </select>
+    <select id="yanzhengNAme" resultMap="map1">
+          SELECT * FROM goods  where name=#{name}
+    </select>
+    <update id="update">
+        update goods set name=#{name},price=#{price},c_id=#{c_id} where  id=#{id};
+    </update>
+</mapper>

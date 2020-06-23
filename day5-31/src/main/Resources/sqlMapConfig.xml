@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- mybatis配置文件  别名、分页插件等 -->
+    <!--别名-->
+    <typeAliases>
+        <!--批量的别名-->
+        <package name="com.jiyun.ssm.pojo"/>
+    </typeAliases>
+    <plugins>
+        <!--5.0以前是pagehelper，以后是interceptor拦截器-->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--reasonable：分页合理化参数，默认值为false。
+                当该参数设置为 true 时，pageNum<=0 时会查询第一页，
+                pageNum>pages（超过总数时），会查询最后一页。
+                默认false 时，直接根据参数进行查询。-->
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
+
+</configuration>
